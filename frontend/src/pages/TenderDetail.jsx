@@ -23,3 +23,36 @@ export default function TenderDetail() {
   const setStatus = (status) => run(async () => { await api(`/tenders/${id}`, { method: "PATCH", body: { status } }); reload(); });
   const review = (bidId, status) => run(async () => { await api(`/bids/${bidId}`, { method: "PATCH", body: { status } }); reload(); bids.reload(); });
   const remove = () => window.confirm("Delete this tender and all its bids?") && run(async () => { await api(`/tenders/${id}`, { method: "DELETE" }); navigate("/tenders"); });
+
+   if (loading && !t) return <p className="muted pulse">Loading...</p>;
+  if (error) return <Notice>{error}</Notice>;
+  return (
+    <>
+      <Link to="/tenders">&larr; Back to tenders</Link>
+      <div className="card" style={{ marginTop: 12 }}>
+        {t.cover_image_url && <img className="cover" src={t.cover_image_url} alt="" />}
+        <div className="row between"><h2>{t.title}</h2><span className={`badge ${t.status}`}>{t.status}</span></div>
+        <p className="muted">{t.category} &middot; Budget {t.budget.toLocaleString()} &middot; Closes {t.deadline_date}</p>
+        <p>{t.description}</p>
+        {isOwner && (
+          <div className="row">
+            {t.status === "open" && <button className="ghost" onClick={() => setStatus("closed")}>Close tender</button>}
+            {t.status === "closed" && <button className="green" onClick={() => setStatus("open")}>Reopen tender</button>}
+            <button onClick={remove}>Delete</button>
+          </div>
+        )}
+      </div>
+      <Notice>{msg}</Notice>
+      {user.role === "contractor" && t.status === "open" && (
+        bidSent ? <Notice type="success">Bid submitted. Track it under Bids.</Notice> : <BidForm tenderId={id} onDone={() => setBidSent(true)} />
+      )}
+      {isOwner && (
+        <>
+          <h3>Proposals received</h3>
+          {bids.data?.items.length === 0 && <p className="muted">No bids yet.</p>}
+          {bids.data?.items.map((b) => <BidRow key={b.id} bid={b} onReview={review} />)}
+        </>
+      )}
+    </>
+  );
+}
