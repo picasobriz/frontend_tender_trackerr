@@ -10,6 +10,12 @@ export default function Navbar() {
     <nav className="nav">
       <strong className="brand">TENDER<span>TRACK</span></strong>
       {links.map(([to, label]) => <NavLink key={to} to={to}>{label}</NavLink>)}
+      {user && (
+        <>
+          <span className="spacer">{user.name} &middot; {user.role}</span>
+          <button className="ghost" onClick={logout}>Log out</button>
+        </>
+      )}
     </nav>
   );
 }
