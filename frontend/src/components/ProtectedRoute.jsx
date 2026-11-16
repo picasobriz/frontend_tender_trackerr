@@ -6,3 +6,10 @@ export default function ProtectedRoute({ roles, children }) {
   if (loading) return <p className="muted pulse">Loading...</p>;
   return children;
 }
+
+export default function ProtectedRoute({ roles, children }) {
+  const { user, loading } = useAuth();
+  if (loading) return <p className="muted pulse">Loading...</p>;
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
