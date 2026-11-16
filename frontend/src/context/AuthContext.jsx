@@ -11,3 +11,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (localStorage.getItem("token")) api("/auth/me").then(setUser).catch(() => {}).finally(() => setLoading(false));
   }, []);
+
+  const login = async (email, password) => {
+    const data = await api("/auth/login", { method: "POST", body: { email, password } });
+    localStorage.setItem("token", data.token);
+    setUser(data.user);
+  };
