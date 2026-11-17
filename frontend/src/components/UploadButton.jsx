@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from "../api";
 import Notice from "./Notice";
 
 // Pick a file, send it to /api/uploads (Cloudinary) and hand the stored URL to onDone.
@@ -12,6 +13,14 @@ export default function UploadButton({ kind, label, onDone }) {
     const body = new FormData();
     body.append("file", file);
     body.append("kind", kind);
+    setBusy(true);
+    try {
+      onDone((await api("/uploads", { method: "POST", body })).url);
+      setError("");
+    } catch (err) {
+      setError(err.message);
+    }
+    setBusy(false);
   };
 
   return (
