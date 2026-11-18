@@ -28,3 +28,4 @@ export default function Bids() {
       <Notice>{error || msg}</Notice>
             {loading && !data && <p className="muted pulse">Loading...</p>}
             {data?.items.length === 0 && <p className="muted">{isAdmin ? "No proposals yet." : "You have not placed any bids yet. Browse open tenders to get started."}</p>}
+            {data?.items.map((b) => <BidRow key={b.id} bid={b} onReview={isAdmin ? review : undefined} />)}
