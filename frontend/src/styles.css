@@ -11,3 +11,11 @@ h2 { border-left: 4px solid var(--red); padding-left: 10px; }
 main { max-width: 960px; margin: 28px auto; padding: 0 16px; animation: fade 0.35s ease; }
 @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes pulse { 50% { opacity: 0.35; } }
+
+/* navbar */
+.nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 18px; padding: 12px 24px; background: #000; border-bottom: 2px solid var(--red); }
+.brand { font-weight: 800; letter-spacing: 1px; }
+.brand span { color: var(--red); }
+.nav a { color: var(--muted); border-bottom: 2px solid transparent; transition: 0.2s; }
+.nav a:hover, .nav a.active { color: var(--text); border-color: var(--green); text-decoration: none; }
+.spacer { margin-left: auto; color: var(--muted); font-size: 14px; }
