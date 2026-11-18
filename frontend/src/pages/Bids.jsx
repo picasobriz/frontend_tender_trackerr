@@ -27,3 +27,4 @@ export default function Bids() {
       <h2>{isAdmin ? "Proposals received" : "My bids"}</h2>
       <Notice>{error || msg}</Notice>
             {loading && !data && <p className="muted pulse">Loading...</p>}
+            {data?.items.length === 0 && <p className="muted">{isAdmin ? "No proposals yet." : "You have not placed any bids yet. Browse open tenders to get started."}</p>}
