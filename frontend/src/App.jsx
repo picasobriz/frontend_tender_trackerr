@@ -27,7 +27,7 @@ export default function App() {
             path="/bids"
             element={guard(<Bids />, ["admin", "contractor"])}
           />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </main>
     </>
