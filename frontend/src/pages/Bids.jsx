@@ -11,4 +11,5 @@ export default function Bids() {
   const isAdmin = user.role === "admin";
   const [page, setPage] = useState(1);
   const [msg, setMsg] = useState(""); 
+  const { data, error, loading, reload } = useFetch(`/bids?page=${page}&per_page=6`);
   
