@@ -42,5 +42,9 @@ export default function TenderForm({ onCreated }) {
       <textarea rows="4" placeholder="Description" required value={form.description} onChange={set("description")} />
       <UploadButton kind="cover" label="Cover image (optional)" onDone={(url) => setForm({ ...form, cover_image_url: url })} />
       {form.cover_image_url && <Notice type="success">Cover image attached.</Notice>}
+         <button>Publish tender</button>
+    </form>
+  );
+}
 
     
