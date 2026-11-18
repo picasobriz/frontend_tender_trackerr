@@ -31,3 +31,20 @@ a.card { display: block; color: inherit; }
 .stat span, .muted { color: var(--muted); font-size: 14px; }
 .cover { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
 .logo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+
+/* forms */
+.form { display: grid; gap: 10px; }
+.auth { max-width: 380px; margin: 40px auto; }
+label { font-size: 13px; color: var(--muted); }
+input, select, textarea { width: 100%; padding: 10px 12px; background: #0f0f0f; color: var(--text); border: 1px solid var(--line); border-radius: 8px; font: inherit; transition: 0.2s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(47, 191, 113, 0.25); }
+select.inline { width: auto; }
+
+/* buttons */
+button { padding: 9px 16px; border: 0; border-radius: 8px; background: var(--red); color: #fff; font: inherit; font-weight: 600; cursor: pointer; transition: 0.2s; }
+button:hover:not(:disabled) { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(224, 25, 43, 0.35); }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.green { background: var(--green-dark); }
+button.green:hover:not(:disabled) { background: var(--green); box-shadow: 0 4px 12px rgba(47, 191, 113, 0.35); }
+button.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+button.ghost:hover:not(:disabled) { background: transparent; border-color: var(--red); box-shadow: none; }
