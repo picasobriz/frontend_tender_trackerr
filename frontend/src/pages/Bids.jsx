@@ -12,4 +12,13 @@ export default function Bids() {
   const [page, setPage] = useState(1);
   const [msg, setMsg] = useState(""); 
   const { data, error, loading, reload } = useFetch(`/bids?page=${page}&per_page=6`);
-  
+
+const review = async (id, status) => {
+    try {
+      await api(`/bids/${id}`, { method: "PATCH", body: { status } });
+      setMsg("");
+      reload();
+    } catch (e) {
+      setMsg(e.message);
+    }
+  };
