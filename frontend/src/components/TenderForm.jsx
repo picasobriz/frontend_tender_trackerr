@@ -40,5 +40,7 @@ export default function TenderForm({ onCreated }) {
       <label>Deadline</label>
       <input type="datetime-local" required value={form.deadline_date} onChange={set("deadline_date")} />
       <textarea rows="4" placeholder="Description" required value={form.description} onChange={set("description")} />
+      <UploadButton kind="cover" label="Cover image (optional)" onDone={(url) => setForm({ ...form, cover_image_url: url })} />
+      {form.cover_image_url && <Notice type="success">Cover image attached.</Notice>}
 
     
