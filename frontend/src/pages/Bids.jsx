@@ -9,3 +9,6 @@ import { useFetch } from "../hooks/useFetch";
 export default function Bids() {
   const { user } = useAuth();
   const isAdmin = user.role === "admin";
+  const [page, setPage] = useState(1);
+  const [msg, setMsg] = useState(""); 
+  
