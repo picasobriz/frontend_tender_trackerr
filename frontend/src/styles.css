@@ -48,3 +48,18 @@ button.green { background: var(--green-dark); }
 button.green:hover:not(:disabled) { background: var(--green); box-shadow: 0 4px 12px rgba(47, 191, 113, 0.35); }
 button.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
 button.ghost:hover:not(:disabled) { background: transparent; border-color: var(--red); box-shadow: none; }
+
+/* badges, notices, helpers */
+.badge { padding: 2px 10px; border: 1px solid; border-radius: 999px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.badge.open, .badge.accepted { color: var(--green); }
+.badge.closed, .badge.rejected { color: var(--red); }
+.badge.awarded { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
+.badge.pending { color: var(--muted); }
+.notice { margin: 0 0 12px; padding: 10px 14px; border-left: 4px solid; border-radius: 8px; animation: fade 0.3s; }
+.notice.error { background: rgba(224, 25, 43, 0.12); border-color: var(--red); }
+.notice.success { background: rgba(47, 191, 113, 0.12); border-color: var(--green); }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.between { justify-content: space-between; }
+.pulse { animation: pulse 1.2s infinite; }
+.pager { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 16px; }
+@media (max-width: 600px) { .nav { flex-wrap: wrap; padding: 10px 14px; } }
