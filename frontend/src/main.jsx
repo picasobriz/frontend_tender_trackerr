@@ -5,3 +5,12 @@ import { wake } from "./api";
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import "./styles.css";
+
+wake();
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </BrowserRouter>
+);
