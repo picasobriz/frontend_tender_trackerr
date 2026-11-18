@@ -13,7 +13,7 @@ export default function Bids() {
   const [msg, setMsg] = useState(""); 
   const { data, error, loading, reload } = useFetch(`/bids?page=${page}&per_page=6`);
 
-const review = async (id, status) => {
+  const review = async (id, status) => {
     try {
       await api(`/bids/${id}`, { method: "PATCH", body: { status } });
       setMsg("");
@@ -22,3 +22,7 @@ const review = async (id, status) => {
       setMsg(e.message);
     }
   };
+    return (
+    <>
+      <h2>{isAdmin ? "Proposals received" : "My bids"}</h2>
+      <Notice>{error || msg}</Notice>
