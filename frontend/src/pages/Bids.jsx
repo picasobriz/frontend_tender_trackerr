@@ -6,3 +6,6 @@ import Pager from "../components/Pager";
 import { useAuth } from "../context/AuthContext";
 import { useFetch } from "../hooks/useFetch";
 
+export default function Bids() {
+  const { user } = useAuth();
+  const isAdmin = user.role === "admin";
