@@ -12,6 +12,7 @@ export default function Tenders() {
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState(isAdmin ? "" : "open");
   const [showForm, setShowForm] = useState(false);
+  const { data, error, loading, reload } = useFetch(`/tenders?page=${page}&per_page=6${status ? `&status=${status}` : ""}`);
 
   return (
     <>
