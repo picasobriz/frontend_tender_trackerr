@@ -7,6 +7,9 @@ import { useAuth } from "../context/AuthContext";
 import { useFetch } from "../hooks/useFetch";
 
 export default function Tenders() {
+  const { user } = useAuth();
+  const isAdmin = user.role === "admin";
+
   return (
     <>
       <div className="row between">
