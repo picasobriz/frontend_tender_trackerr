@@ -9,6 +9,9 @@ import { useFetch } from "../hooks/useFetch";
 export default function Tenders() {
   const { user } = useAuth();
   const isAdmin = user.role === "admin";
+  const [page, setPage] = useState(1);
+  const [status, setStatus] = useState(isAdmin ? "" : "open");
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <>
