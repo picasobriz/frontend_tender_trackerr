@@ -48,3 +48,18 @@ export async function api(path, { method = "GET", body } = {}) {
     throw new Error("Your session has expired. Please log in again.");
   }
 
+  if (!res.ok) {
+    const fields = Object.entries(data?.details || {})
+      .map(([key, value]) => `${key} ${value}`)
+      .join(", ");
+
+    throw new Error(
+      fields
+        ? `${data?.error || "Request failed"}: ${fields}`
+        : data?.error || "Something went wrong"
+    );
+  }
+
+  return data;
+}
+
