@@ -30,6 +30,10 @@ export default function Tenders() {
           {isAdmin && <button onClick={() => setShowForm(!showForm)}>{showForm ? "Cancel" : "+ New tender"}</button>}
         </div>
       </div>
+      {showForm && <TenderForm onCreated={() => { setShowForm(false); setPage(1); reload(); }} />}
+      <Notice>{error}</Notice>
+      {loading && !data && <p className="muted pulse">Loading...</p>}
+      {data?.items.length === 0 && <p className="muted">No tenders to show yet.</p>}
     </>
   );
 }
