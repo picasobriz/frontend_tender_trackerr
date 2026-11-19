@@ -31,3 +31,13 @@ export async function api(path, { method = "GET", body } = {}) {
       "Cannot reach the server. It may be waking up, please try again in a minute."
     );
   }
+
+  let data = null;
+
+  if (res.status !== 204) {
+    try {
+      data = await res.json();
+    } catch {
+      data = {};
+    }
+  }
