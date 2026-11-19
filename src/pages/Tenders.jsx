@@ -34,6 +34,13 @@ export default function Tenders() {
       <Notice>{error}</Notice>
       {loading && !data && <p className="muted pulse">Loading...</p>}
       {data?.items.length === 0 && <p className="muted">No tenders to show yet.</p>}
+      {data?.items.map((t) => (
+        <Link key={t.id} to={`/tenders/${t.id}`} className="card item">
+          <div className="row between"><strong>{t.title}</strong><span className={`badge ${t.status}`}>{t.status}</span></div>
+          <span className="muted">{t.category} &middot; Budget {t.budget.toLocaleString()} &middot; Closes {t.deadline_date}</span>
+        </Link>
+      ))}
+      {data && <Pager data={data} page={page} setPage={setPage} />}
     </>
   );
 }
