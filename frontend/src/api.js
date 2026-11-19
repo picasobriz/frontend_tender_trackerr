@@ -41,3 +41,10 @@ export async function api(path, { method = "GET", body } = {}) {
       data = {};
     }
   }
+
+  if (res.status === 401 && !path.startsWith("/auth/login")) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    throw new Error("Your session has expired. Please log in again.");
+  }
+
