@@ -18,6 +18,17 @@ export default function Tenders() {
     <>
       <div className="row between">
         <h2>Tenders</h2>
+        <div className="row">
+          {user.role !== "auditor" && (
+            <select className="inline" value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}>
+              {isAdmin && <option value="">All statuses</option>}
+              <option value="open">Open</option>
+              <option value="closed">Closed</option>
+              <option value="awarded">Awarded</option>
+            </select>
+          )}
+          {isAdmin && <button onClick={() => setShowForm(!showForm)}>{showForm ? "Cancel" : "+ New tender"}</button>}
+        </div>
       </div>
     </>
   );
