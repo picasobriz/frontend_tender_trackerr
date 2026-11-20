@@ -1,62 +1,121 @@
+
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { api } from "../api";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "contractor"
+  });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const change = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  async function submit(e) {
     e.preventDefault();
     setLoading(true);
     setError("");
+
     try {
-      const res = await fetch("/api/auth/register", {
+      await api("/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: {
+          ...form,
+          email: form.email.trim().toLowerCase()
+        }
       });
-      if (!res.ok) throw new Error("Registration failed");
+
       navigate("/login");
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
-    <div className="card auth-card">
-      <h2>Create Account</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Full Name / Organization"
-          required
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-        <input
-          type="email"
-          placeholder="Email Address"
-          required
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Registering..." : "Register"}
-        </button>
-      </form>
-      <p className="muted">Already have an account? <Link to="/login">Login</Link></p>
+    <div className="auth-shell">
+      <div className="auth-card card">
+        <div className="auth-logo">
+          Tender<span>Track</span>
+        </div>
+
+        <h1>Create account</h1>
+
+        {error && (
+          <div className="notice error">{error}</div>
+        )}
+
+        <form onSubmit={submit}>
+          <label>
+            Full name / Organization
+            <input
+              name="name"
+              type="text"
+              required
+              maxLength={100}
+              value={form.name}
+              onChange={change}
+            />
+          </label>
+
+          <label>
+            Email
+            <input
+              name="email"
+              type="email"
+              required
+              value={form.email}
+              onChange={change}
+            />
+          </label>
+
+          <label>
+            Password
+            <input
+              name="password"
+              type="password"
+              minLength={8}
+              maxLength={128}
+              required
+              value={form.password}
+              onChange={change}
+            />
+          </label>
+
+          <label>
+            Account type
+            <select
+              name="role"
+              value={form.role}
+              onChange={change}
+            >
+              <option value="contractor">Contractor</option>
+              <option value="auditor">Auditor</option>
+            </select>
+          </label>
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+
+        <p className="muted center">
+          Already have an account?{" "}
+          <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
