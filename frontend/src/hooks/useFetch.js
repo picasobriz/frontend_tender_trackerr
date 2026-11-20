@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../api";
 
+<<<<<<< HEAD
 // GET `path` and track loading/error. Pass null to skip. Call reload() after a change.
+=======
+
+>>>>>>> origin/main
 export function useFetch(path) {
   const [state, setState] = useState({ data: null, error: "", loading: !!path });
   const reload = useCallback(() => {
