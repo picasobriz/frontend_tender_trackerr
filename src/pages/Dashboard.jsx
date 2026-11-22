@@ -30,7 +30,11 @@ export default function Dashboard() {
         {user?.role !== "auditor" && <Link to="/bids" className="btn-secondary">{user?.role === "admin" ? "Proposals" : "My Bids"}</Link>}
         <button className="theme-toggle" onClick={() => setDark(!dark)}>{dark ? "Light" : "Dark"}</button>
       </div>
-    </div></section>
+    </div>
+      <div className="hero-visual">
+        <img src="/images/construction-team.png" alt="Construction team reviewing a project blueprint" />
+      </div>
+    </section>
     {err && <div className="notice error">{err}</div>}
     <section className="dashboard-stats">
       {cards.map(([key, label]) => <div className="stat-card" key={key}><span>{label}</span><strong>{Number(d?.[key] ?? 0).toLocaleString()}</strong></div>)}
