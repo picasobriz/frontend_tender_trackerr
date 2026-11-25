@@ -14,9 +14,6 @@ export default function Dashboard() {
   const { user } = useAuth();
   const [d, setD] = useState(null);
   const [err, setErr] = useState("");
-  const [dark, setDark] = useState(localStorage.getItem("tendertrack-theme") === "dark");
-
-  useEffect(() => { document.body.classList.toggle("dark-theme", dark); localStorage.setItem("tendertrack-theme", dark ? "dark" : "light"); }, [dark]);
   useEffect(() => { api("/dashboard").then(setD).catch(e => setErr(getError(e))); }, []);
 
   const cards = Object.entries(CARDS[d?.role || user?.role] || {});
@@ -28,7 +25,6 @@ export default function Dashboard() {
       <div className="dashboard-actions">
         <Link to="/tenders" className="btn-primary">Browse Tenders</Link>
         {user?.role !== "auditor" && <Link to="/bids" className="btn-secondary">{user?.role === "admin" ? "Proposals" : "My Bids"}</Link>}
-        <button className="theme-toggle" onClick={() => setDark(!dark)}>{dark ? "Light" : "Dark"}</button>
       </div>
     </div>
       <div className="hero-visual">
