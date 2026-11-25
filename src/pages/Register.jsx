@@ -5,7 +5,7 @@ import { api } from "../api";
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "contractor" });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);\n  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const change = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -24,7 +24,7 @@ export default function Register() {
     <form onSubmit={submit}>
       <label>Full name / Organization<input name="name" type="text" required maxLength={100} value={form.name} onChange={change} /></label>
       <label>Email<input name="email" type="email" required value={form.email} onChange={change} /></label>
-      <label>Password<input name="password" type="password" minLength={8} maxLength={128} required value={form.password} onChange={change} /></label>
+      <label>Password<div className="password-field"><input name="password" type={showPassword ? "text" : "password"} minLength={8} maxLength={128} required value={form.password} onChange={change} /><button type="button" className="password-toggle" onClick={() => setShowPassword(v => !v)}>{showPassword ? "Hide" : "Show"}</button></div></label>
       <label>Account type
         <select name="role" value={form.role} onChange={change}>
           <option value="contractor">Contractor</option><option value="auditor">Auditor</option>

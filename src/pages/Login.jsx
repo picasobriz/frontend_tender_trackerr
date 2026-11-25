@@ -6,7 +6,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);\n  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault(); setLoading(true); setError("");
     try {
       await login(email.trim(), password);
-      navigate(location.state?.from?.pathname || "/", { replace: true });
+      navigate(location.state?.from?.pathname || "/dashboard", { replace: true });
     } catch (x) { setError(x.message); } finally { setLoading(false); }
   }
 
@@ -28,8 +28,8 @@ export default function Login() {
     {/verify/i.test(error) && <p><Link to="/verify" state={{ notice: "Enter the token from your verification email." }}>Verify your account</Link></p>}
     <form onSubmit={submit}>
       <label>Email<input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" /></label>
-      <label>Password<input type="password" required value={password} onChange={e => setPassword(e.target.value)} placeholder="Your password" /></label>
-      <button disabled={loading}>{loading ? "Signing in..." : "Sign In"}</button>
+      <label>Password<div className="password-field"><input type={showPassword ? "text" : "password"} required value={password} onChange={e => setPassword(e.target.value)} placeholder="Your password" /><button type="button" className="password-toggle" onClick={() => setShowPassword(v => !v)}>{showPassword ? "Hide" : "Show"}</button></div></label>\n      <div className="form-inline-link"><Link to="/forgot-password">Forgot password?</Link></div>
+      <button type="submit" disabled={loading}>{loading ? "Signing in..." : "Sign In"}</button>
     </form>
     <p className="muted center">Don't have an account? <Link to="/register">Create one</Link> · <Link to="/verify">Verify email</Link></p>
   </div></div>;
