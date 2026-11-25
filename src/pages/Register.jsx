@@ -5,7 +5,8 @@ import { api } from "../api";
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "contractor" });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);\n  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const change = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
